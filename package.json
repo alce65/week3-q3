@@ -6,6 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "jest",
+    "test:prod": "jest --watchAll --coverage --watchAll=false --passWithNoTests",
+    "test:w": "jest --watchAll --coverage",
     "build": "tsc --watch"
   },
   "keywords": [],

@@ -37,3 +37,14 @@ npm i -D jest ts-jest @types/jest @types/node jest-ts-webcompat-resolver
 
 ```
 
+jest-DOM environment
+
+```shell
+npm i -D jest-environment-jsdom 
+```
+
+Testing-library
+
+```shell
+npm i -D @testing-library/dom @testing-library/jest-dom @testing-library/user-event
+```

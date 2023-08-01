@@ -5,11 +5,11 @@ export class Footer extends Component {
   constructor(selector: string, brand = 'ISDI Coders') {
     super(selector);
     this.brand = brand;
-    this.template = this.makeTemplate();
+    this.template = this.createTemplate();
     this.render();
   }
 
-  makeTemplate() {
+  createTemplate() {
     return `
     <footer>
       <address>${this.brand}</address>

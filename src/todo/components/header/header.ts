@@ -3,11 +3,11 @@ import { Component } from '../component.js';
 export class Header extends Component {
   constructor(selector: string) {
     super(selector);
-    this.template = this.makeTemplate();
+    this.template = this.createTemplate();
     this.render();
   }
 
-  makeTemplate() {
+  createTemplate() {
     return `
     <header>
       <h1>TODO List</h1>

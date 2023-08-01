@@ -1,3 +1,4 @@
+/* eslint-disable max-params */
 /* eslint-disable no-unused-vars */
 import { Character } from './character.js';
 import { Fighter } from './fighter.js';

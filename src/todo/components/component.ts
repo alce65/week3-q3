@@ -13,4 +13,10 @@ export abstract class Component {
     this.element = element;
     this.element.insertAdjacentHTML(position, this.template);
   }
+
+  clear() {
+    const element = document.querySelector(this.selector);
+    if (!element) return;
+    element.innerHTML = '';
+  }
 }

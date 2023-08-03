@@ -1,4 +1,6 @@
 /* eslint-disable no-new */
+
+import './style.css';
 import { Footer } from './components/footer/footer.js';
 import { Header } from './components/header/header.js';
 import { Main } from './components/main/main.js';

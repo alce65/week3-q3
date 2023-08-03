@@ -1,0 +1,27 @@
+.list-non-style {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+header {
+  nav {
+    ul {
+      @extend .list-non-style;
+    }
+  }
+}
+
+footer {
+  nav {
+    ul {
+      @extend .list-non-style;
+    }
+  }
+}
+
+header nav ul a,
+footer nav ul a {
+  text-decoration: none;
+  color: inherit;
+}

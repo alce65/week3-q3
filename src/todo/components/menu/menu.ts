@@ -1,3 +1,4 @@
+import './menu.scss';
 import { MenuOption } from '../../types/menu.options.js';
 import { Component } from '../component.js';
 

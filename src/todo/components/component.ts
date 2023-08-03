@@ -10,8 +10,8 @@ export abstract class Component {
   render(position: InsertPosition = 'beforeend') {
     const element = document.querySelector(this.selector);
     if (!element) return;
-    this.element = element;
-    this.element.insertAdjacentHTML(position, this.template);
+    element.insertAdjacentHTML(position, this.template);
+    this.element = element.lastElementChild!;
   }
 
   clear() {

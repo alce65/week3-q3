@@ -1,15 +1,19 @@
 /* eslint-disable no-negated-condition */
-import { getTasks, setTasks } from '../../data/tasks.js';
-import { Task } from '../../model/task.js';
+import { ApiTasksRepository, Repository } from '../../data/api.repository.js';
+import { FullTask } from '../../model/task.js';
 import { AddTask } from '../add.task/add.task.js';
 import { Card } from '../card/card.js';
 import { Component } from '../component.js';
 
+const urlBase = 'http://localhost:3000/tasks';
 export class Tasks extends Component {
-  tasks: Task[];
+  tasks: FullTask[];
+  repo: Repository<FullTask>;
   constructor(selector: string) {
     super(selector);
-    this.tasks = getTasks();
+    this.repo = new ApiTasksRepository(urlBase);
+    this.tasks = [];
+    this.loadTasks();
 
     this.manageComponent();
   }
@@ -30,26 +34,30 @@ export class Tasks extends Component {
     );
   }
 
-  addTask(task: Task) {
+  async loadTasks() {
+    this.tasks = await this.repo.getAll();
+    this.manageComponent();
+  }
+
+  async addTask(task: Omit<FullTask, 'id'>) {
     console.log('Add');
-    this.tasks.push(task);
-    setTasks(this.tasks);
+    const fullTask = await this.repo.create(task);
+    this.tasks.push(fullTask);
     this.manageComponent();
   }
 
-  delete(task: Task) {
+  async delete(task: FullTask) {
+    await this.repo.delete(task.id);
     this.tasks = this.tasks.filter((item) => item.title !== task.title);
-    setTasks(this.tasks);
     this.manageComponent();
   }
 
-  update(task: Task) {
+  async update(task: FullTask) {
+    task.isCompleted = !task.isCompleted;
+    const updatedTask = await this.repo.update(task.id, task);
     this.tasks = this.tasks.map((item) =>
-      item.title !== task.title
-        ? item
-        : { ...item, isCompleted: !item.isCompleted }
+      item.title !== task.title ? item : updatedTask
     );
-    setTasks(this.tasks);
   }
 
   manageComponent() {

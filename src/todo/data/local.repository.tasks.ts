@@ -12,10 +12,18 @@ export const getTasks = () => {
   const data = localStorage.getItem(storeName);
 
   if (data) {
+    fetch('http://localhost:3000/tasks')
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => console.log(data));
+
     return JSON.parse(data) as Task[];
   }
 
   setTasks(mock);
+
   return mock;
 };
 

@@ -1,17 +1,17 @@
 /* eslint-disable no-unused-vars */
-import { Task } from '../../model/task.js';
+import { FullTask } from '../../model/task.js';
 import { Component } from '../component.js';
 
 export class Card extends Component {
-  task: Task;
-  erase: (task: Task) => void;
-  update: (task: Task) => void;
+  task: FullTask;
+  erase: (task: FullTask) => void;
+  update: (task: FullTask) => void;
 
   constructor(
     selector: string,
-    task: Task,
-    erase: (task: Task) => void,
-    update: (task: Task) => void
+    task: FullTask,
+    erase: (task: FullTask) => void,
+    update: (task: FullTask) => void
   ) {
     super(selector);
     this.task = task;

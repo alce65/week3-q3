@@ -1,4 +1,4 @@
-import { getTasks, removeTasks } from './tasks';
+import { getTasks, removeTasks } from './local.repository.tasks';
 
 // Stubs
 // - Mocks: jest.fn()

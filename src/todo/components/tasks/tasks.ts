@@ -35,29 +35,45 @@ export class Tasks extends Component {
   }
 
   async loadTasks() {
-    this.tasks = await this.repo.getAll();
-    this.manageComponent();
+    try {
+      this.tasks = await this.repo.getAll();
+      this.manageComponent();
+    } catch (error) {
+      console.error((error as Error).message);
+    }
   }
 
   async addTask(task: Omit<FullTask, 'id'>) {
     console.log('Add');
-    const fullTask = await this.repo.create(task);
-    this.tasks.push(fullTask);
-    this.manageComponent();
+    try {
+      const fullTask = await this.repo.create(task);
+      this.tasks.push(fullTask);
+      this.manageComponent();
+    } catch (error) {
+      console.error((error as Error).message);
+    }
   }
 
   async delete(task: FullTask) {
-    await this.repo.delete(task.id);
-    this.tasks = this.tasks.filter((item) => item.title !== task.title);
-    this.manageComponent();
+    try {
+      await this.repo.delete(task.id);
+      this.tasks = this.tasks.filter((item) => item.title !== task.title);
+      this.manageComponent();
+    } catch (error) {
+      console.error((error as Error).message);
+    }
   }
 
   async update(task: FullTask) {
-    task.isCompleted = !task.isCompleted;
-    const updatedTask = await this.repo.update(task.id, task);
-    this.tasks = this.tasks.map((item) =>
-      item.title !== task.title ? item : updatedTask
-    );
+    try {
+      task.isCompleted = !task.isCompleted;
+      const updatedTask = await this.repo.update(task.id, task);
+      this.tasks = this.tasks.map((item) =>
+        item.title !== task.title ? item : updatedTask
+      );
+    } catch (error) {
+      console.error((error as Error).message);
+    }
   }
 
   manageComponent() {

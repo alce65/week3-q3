@@ -16,6 +16,8 @@ export class ApiTasksRepository implements Repository<FullTask> {
 
   async getAll(): Promise<FullTask[]> {
     const response = await fetch(this.urlBase);
+    if (!response.ok)
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
     const data = await response.json();
     return data;
   }
@@ -23,6 +25,8 @@ export class ApiTasksRepository implements Repository<FullTask> {
   async get(id: number): Promise<FullTask> {
     const url = this.urlBase + '/' + id;
     const response = await fetch(url);
+    if (!response.ok)
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
     const data = await response.json();
     return data;
   }
@@ -35,6 +39,8 @@ export class ApiTasksRepository implements Repository<FullTask> {
         'Content-Type': 'application/json',
       },
     });
+    if (!response.ok)
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
     const data = await response.json();
     return data;
   }
@@ -48,14 +54,19 @@ export class ApiTasksRepository implements Repository<FullTask> {
         'Content-Type': 'application/json',
       },
     });
+    if (!response.ok)
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
     const data = await response.json();
     return data;
   }
 
   async delete(id: number): Promise<void> {
     const url = this.urlBase + '/' + id;
-    await fetch(url, {
+    const response = await fetch(url, {
       method: 'DELETE',
     });
+
+    if (!response.ok)
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
   }
 }
